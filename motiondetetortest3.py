@@ -60,13 +60,14 @@ while(1):
 
     for keypoint in keypoints:
         if keypoint:
-            x = int(round(keypoint.pt[0]))
-            y = int(round(keypoint.pt[1]))
-            s = int(round(keypoint.size))/2
-            bbox = (x-100,y-100,100,100)
+            x = int(keypoint.pt[0])
+            y = int(keypoint.pt[1])
+            s = int(keypoint.size)/2
+            bbox = (x-50,y-50,100,100)
             bboxes.append(bbox)
             cv2.rectangle(fgmask, (x-100,y+100),(x+100,y-100),(255,255,255),3)
             cv2.circle(frame, (int(bbox[0]+bbox[2]/2), int(bbox[1]+bbox[3]/2)), 2, (255,255,255))
+            cv2.circle(frame, (x, y), 5, (0,255,0))
             
     if (blobdetect == False):
         if (len(bboxes) > 0):
