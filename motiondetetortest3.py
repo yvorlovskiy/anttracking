@@ -4,7 +4,7 @@ import math
 
 #motiondetetortest3.py
 
-
+#Dustin is EPIC
 
 cap = cv2.VideoCapture('ants3_Trim.mp4')#"movingcircles_Trim.mp4"
 fgbg = cv2.createBackgroundSubtractorMOG2(999, detectShadows=True)
@@ -65,7 +65,8 @@ while(1):
             s = int(round(keypoint.size))/2
             bbox = (x-100,y-100,100,100)
             bboxes.append(bbox)
-            cv2.rectangle(fgmask,(x-s,y+s),(x+s,y-s),(255,255,255),3)
+            cv2.rectangle(fgmask, (x-100,y+100),(x+100,y-100),(255,255,255),3)
+            cv2.circle(frame, (int(bbox[0]+bbox[2]/2), int(bbox[1]+bbox[3]/2)), 2, (255,255,255))
             
     if (blobdetect == False):
         if (len(bboxes) > 0):
@@ -74,6 +75,8 @@ while(1):
     else:
         ok, box = tracker.update(frame)
         cv2.rectangle(frame,(int(box[0]),int(box[1])),(int(box[0]) + int(box[2]),int(box[1]) + int(box[3])),(255,255,255),3)
+        cv2.circle(frame, (int(box[0]+box[2]/2), int(box[1]+box[3]/2)), 2, (255,255,255))
+        
         print(box)
 
     ''' for bbox in bboxes:
