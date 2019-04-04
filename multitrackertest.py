@@ -75,8 +75,9 @@ while(1):
         #ok, box = tracker.update(frame)
         success, box = multiTracker.update(frame)
         #cv2.rectangle(frame,(int(box[0]),int(box[1])),(int(box[0]) + int(box[2]),int(box[1]) + int(box[3])),(255,255,255),3)
-        #cv2.circle(frame, (int(box[0]+box[2]/2), int(box[1]+box[3]/2)), 2, (255,255,255))
+        cv2.circle(frame, (int(box[0][0]+box[0][2]/2), int(box[0][1]+box[0][3]/2)), 50, (255,255,255))
         
+
         print(box)
 
         
