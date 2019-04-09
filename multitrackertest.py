@@ -6,7 +6,7 @@ import math
 
 #Yury is gay, and Dustin is EPIC
 
-cap = cv2.VideoCapture('ants3_Trim.mp4')#"movingcircles_Trim.mp4"
+cap = cv2.VideoCapture('multi_ants.mp4')#"movingcircles_Trim.mp4"
 fgbg = cv2.createBackgroundSubtractorMOG2(999, detectShadows=True)
 kernel = np.ones((11,11),np.uint8)
 tracker = cv2.TrackerMOSSE_create()
@@ -54,6 +54,8 @@ while(1):
     keypoints = detector.detect(fgmask)
 
     bboxes = []
+    boxes = []
+
 
     for keypoint in keypoints:
         if keypoint:
@@ -71,24 +73,30 @@ while(1):
             blobdetect = True
             #ok = tracker.init(frame, bboxes[0])
             multiTracker.add(tracker, frame, bbox)
+        elif (len(bb0xes) = 0)
+
     else:
         #ok, box = tracker.update(frame)
         success, box = multiTracker.update(frame)
+        boxes.append(box)
         cv2.rectangle(frame,(int(box[0][0]),int(box[0][1])),(int(box[0][0]) + int(box[0][2]),int(box[0][1]) + int(box[0][3])),(255,255,255),3)
         cv2.circle(frame, (int(box[0][0]+box[0][2]/2), int(box[0][1]+box[0][3]/2)), 2, (0,255,0))
+
+        for bbox in bboxes:
+            for box in boxes:
+                diff = len(bboxes)-len(boxes)
+                
+                if (diff>=1):
+                    multiTracker.add(tracker, frame, bboxes[diff])
         
+   
+     
+    
 
         print(box)
-
-        
-
-
-
-        
-
     
             
-    #print(bboxes, "fgbg")
+    print(bboxes, "fgbg")
     
 
     cv2.imshow('frame', frame)
@@ -101,3 +109,8 @@ while(1):
 
 cap.release()
 cv2.destroyAllWindows()
+
+
+# NEXT - add and release multitrackers
+
+# adding 
