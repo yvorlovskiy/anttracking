@@ -43,6 +43,12 @@ cv2.createTrackbar('x1','image',0,1000,nothing)
 cv2.createTrackbar('y1','image',0, 1000,nothing)
 
 
+cv2.createTrackbar('blur','image',0, 1000,nothing)
+cv2.createTrackbar('y1','image',0, 1000,nothing)
+
+
+
+
 while(1):
     
     ret, frame = cap.read()
@@ -66,7 +72,9 @@ while(1):
     resize = gui_frame[ y1:height, x1:width]
 
     cv2.imshow('image', resize)
-    closing = cv2.morphologyEx(fake_frame, cv2.MORPH_CLOSE, kernel)
+
+    blur = cv2.GaussianBlur(frame, (9, 9), 0)
+    closing = cv2.morphologyEx(blur, cv2.MORPH_CLOSE, kernel)
     opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
     dilate = cv2.dilate(closing, (5, 5), iterations=1)
     

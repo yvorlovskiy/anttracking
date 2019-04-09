@@ -6,7 +6,7 @@ import math
 
 #Yury is gay, and Dustin is EPIC
 
-cap = cv2.VideoCapture('multi_ants3.mov')#"movingcircles_Trim.mp4"'multi_ants2.mov'
+cap = cv2.VideoCapture('multi_ants2.mov')#"movingcircles_Trim.mp4"'multi_ants2.mov'
 fgbg = cv2.createBackgroundSubtractorMOG2(999, detectShadows=True)
 kernel = np.ones((11,11),np.uint8)
 tracker = cv2.TrackerMOSSE_create()
@@ -32,7 +32,6 @@ detector = cv2.SimpleBlobDetector_create(params)
 blobdetect = False 
 
 
-
 while(1):
     
     ret, frame = cap.read()
@@ -43,10 +42,18 @@ while(1):
     #cv2.circle(frame, (rectangle[0], rectangle[1]), 5, (0,255,0))
 
     fake_frame = frame
-    blur = cv2.GaussianBlur(frame, (5, 5), 0)
+    
+    
+    blur = cv2.GaussianBlur(frame, (9, 9), 0)
+    #median = cv2.medianBlur(frame, 15)
+
+    #noisy = cv2.fastNlMeansDenoisingMulti(frame, 2, 5, None, 4, 7, 35)
+
+    
     closing = cv2.morphologyEx(blur, cv2.MORPH_CLOSE, kernel)
     opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
     dilate = cv2.dilate(closing, (5, 5), iterations=1)
+    #smoothed = cv2.filter2D(dilate, -10, kernel)
     
 
     ret, thresh=  cv2.threshold(dilate,127,255,cv2.THRESH_BINARY)
