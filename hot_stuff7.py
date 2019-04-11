@@ -4,7 +4,7 @@ import math
 
 #motiondetetortest3.py
 
-#Yury is gay, and Dustin is EPIC
+#Yury is EPIC, and Dustin is EPIC
 
 cap = cv2.VideoCapture('multi_ants2.mov')#"movingcircles_Trim.mp4"'multi_ants2.mov'
 fgbg = cv2.createBackgroundSubtractorMOG2(999, detectShadows=True)
@@ -15,10 +15,10 @@ bboxes = []
 
 params = cv2.SimpleBlobDetector_Params()
     
-params.minThreshold = 50
-params.maxThreshold = 255
+params.minThreshold = 0
+params.maxThreshold = 30
 params.filterByArea = True
-params.minArea = 25
+params.minArea = 150
 params.maxArea = 100000
 params.filterByCircularity = False
 params.filterByInertia = False
@@ -56,7 +56,7 @@ while(1):
     #smoothed = cv2.filter2D(dilate, -10, kernel)
     
 
-    ret, thresh=  cv2.threshold(dilate,127,255,cv2.THRESH_BINARY)
+    ret, thresh=  cv2.threshold(dilate,75,255,cv2.THRESH_BINARY)
     
     fgmask = fgbg.apply(thresh, None, -1)
 
